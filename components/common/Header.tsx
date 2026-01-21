@@ -10,7 +10,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
-    { name: "Collection", href: "#" },
+    { name: "Collection", href: "#collection" },
     { name: "Our Story", href: "#" },
     { name: "Contact", href: "#" },
     { name: "Blog", href: "#" },

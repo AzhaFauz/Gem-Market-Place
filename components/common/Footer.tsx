@@ -1,12 +1,39 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import DiamondLogo from "../icons/DiamondLogo";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  const quickLinks = [
+    { name: "Our Collection", href: "#collection" },
+    { name: "Our Story", href: "#story" },
+    { name: "Certification", href: "#certification" },
+    { name: "Custom Orders", href: "#custom-orders" },
+  ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect(); // animate once
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (footerRef.current) observer.observe(footerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <footer className="relative bg-[#020617] overflow-hidden animate-footerFade">
+    <footer ref={footerRef} className="relative bg-[#020617] overflow-hidden">
       {/* Top divider */}
       <div className="h-px bg-linear-to-r from-transparent via-[#F59E0B33] to-transparent" />
 
@@ -14,13 +41,16 @@ export default function Footer() {
       <div className="pointer-events-none absolute -bottom-50 left-1/2 -translate-x-1/2 w-150 h-150 rounded-full bg-[#F59E0B0D] blur-[120px]" />
 
       <div className="relative z-10 max-w-full mx-auto px-6 sm:px-10 md:px-20 py-14 sm:py-16 grid gap-12 md:grid-cols-3 text-center md:text-left">
-        {/* Brand Section */}
-        <div className="opacity-0 animate-footerFade delay-100 mx-auto md:mx-0">
+        {/* Brand */}
+        <div
+          className={`mx-auto md:mx-0 opacity-0 ${
+            visible ? "animate-footerFade delay-100" : ""
+          }`}
+        >
           <Link
             href="/"
             className="flex items-center justify-center md:justify-start gap-3 mb-4 transition hover:scale-105"
           >
-            {/* Logo with glow */}
             <div className="relative">
               <div className="absolute inset-0 bg-[#FBBF24] opacity-30 blur-lg rounded-full" />
               <div className="relative text-[#FBBF24]">
@@ -42,8 +72,12 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Contact Section */}
-        <div className="opacity-0 animate-footerFade delay-250">
+        {/* Contact */}
+        <div
+          className={`opacity-0 ${
+            visible ? "animate-footerFade delay-250" : ""
+          }`}
+        >
           <h4 className="text-lg text-white mb-5">Contact Us</h4>
 
           <ul className="space-y-4 text-sm sm:text-md text-[#94A3B8] flex flex-col items-center md:items-start">
@@ -71,19 +105,21 @@ export default function Footer() {
         </div>
 
         {/* Quick Links */}
-        <div className="opacity-0 animate-footerFade delay-400">
+        <div
+          className={`opacity-0 ${
+            visible ? "animate-footerFade delay-400" : ""
+          }`}
+        >
           <h4 className="text-lg text-white mb-5">Quick Links</h4>
 
           <ul className="space-y-3 text-sm sm:text-md text-[#94A3B8] flex flex-col items-center md:items-start">
-            {[
-              "Our Collection",
-              "Our Story",
-              "Certification",
-              "Custom Orders",
-            ].map((item) => (
-              <li key={item}>
-                <Link href="#" className="transition hover:text-[#FBBF24]">
-                  {item}
+            {quickLinks.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.href}
+                  className="transition hover:text-[#FBBF24]"
+                >
+                  {item.name}
                 </Link>
               </li>
             ))}
@@ -95,7 +131,11 @@ export default function Footer() {
       <div className="h-px bg-linear-to-r from-transparent via-[#F59E0B1A] to-transparent" />
 
       {/* Copyright */}
-      <div className="relative z-10 text-center px-6 pt-6 pb-12 sm:pb-16 opacity-0 animate-footerFade delay-600">
+      <div
+        className={`relative z-10 text-center px-6 pt-6 pb-12 sm:pb-16 opacity-0 ${
+          visible ? "animate-footerFade delay-600" : ""
+        }`}
+      >
         <p className="text-[#64748B] text-sm sm:text-md">
           © {new Date().getFullYear()} Zash Gems. All rights reserved. Ethically
           sourced from Sri Lanka.

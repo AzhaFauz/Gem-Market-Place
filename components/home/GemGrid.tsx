@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import GemCard, { Gem } from "./GemCard";
 
 const gems: Gem[] = [
@@ -66,13 +67,44 @@ const gems: Gem[] = [
 ];
 
 export default function GemGrid() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect(); // animate once
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="relative bg-[#020617] py-28 px-6 sm:px-10 md:px-20 overflow-hidden">
-      {/* Decorative Amber Glow */}
+    <section
+      id="collection"
+      ref={sectionRef}
+      className="
+    scroll-mt-28 relative bg-[#020617]
+    py-20 sm:py-24 md:py-28
+    px-4 sm:px-8 md:px-20
+    overflow-hidden
+  "
+    >
+      {/* Decorative Glow */}
       <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#f59e0b0d] blur-3xl" />
 
       {/* Heading */}
-      <div className="relative text-center max-w-3xl mx-auto mb-20">
+      <div
+        className={`relative text-center max-w-3xl mx-auto mb-20 opacity-0 ${
+          visible ? "animate-sectionFade" : ""
+        }`}
+      >
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-wide text-white">
           Our{" "}
           <span className="bg-linear-to-r from-[#fbbf24] to-[#d97706] bg-clip-text text-transparent font-medium">
@@ -85,9 +117,18 @@ export default function GemGrid() {
       </div>
 
       {/* Grid */}
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        {gems.map((gem) => (
-          <GemCard key={gem.name} gem={gem} />
+      <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        {gems.map((gem, index) => (
+          <div
+            key={gem.name}
+            className={`opacity-0 ${visible ? "animate-gemFade" : ""}`}
+            style={{
+              animationDelay: `${index * 120}ms`,
+              animationFillMode: "forwards",
+            }}
+          >
+            <GemCard gem={gem} index={index} />
+          </div>
         ))}
       </div>
     </section>
