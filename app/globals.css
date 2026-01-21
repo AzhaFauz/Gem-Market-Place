@@ -76,6 +76,51 @@
   animation: glow 1.5s infinite;
 }
 
+@keyframes footerFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-footerFade {
+  animation: footerFade 1.2s ease-out forwards;
+}
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-heroFadeUp {
+  animation: heroFadeUp 1.2s ease-out forwards;
+}
+
+.animate-heroFadeScale {
+  animation: heroFadeScale 1.4s ease-out forwards;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
