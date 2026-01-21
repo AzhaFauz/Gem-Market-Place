@@ -6,18 +6,28 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0F172ACC] text-slate-300 overflow-hidden animate-footerFade">
+    <footer className="relative bg-[#020617] overflow-hidden animate-footerFade">
       {/* Top divider */}
-      <div className="h-px bg-linear-to-r from-transparent via-[#F59E0B55] to-transparent animate-pulse" />
+      <div className="h-px bg-linear-to-r from-transparent via-[#F59E0B33] to-transparent" />
 
-      <div className="max-w-full mx-auto px-6 sm:px-10 md:px-20 py-14 sm:py-16 grid gap-12 md:grid-cols-3 text-center md:text-left">
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute -bottom-50 left-1/2 -translate-x-1/2 w-150 h-150 rounded-full bg-[#F59E0B0D] blur-[120px]" />
+
+      <div className="relative z-10 max-w-full mx-auto px-6 sm:px-10 md:px-20 py-14 sm:py-16 grid gap-12 md:grid-cols-3 text-center md:text-left">
         {/* Brand Section */}
         <div className="opacity-0 animate-footerFade delay-100 mx-auto md:mx-0">
           <Link
             href="/"
             className="flex items-center justify-center md:justify-start gap-3 mb-4 transition hover:scale-105"
           >
-            <DiamondLogo />
+            {/* Logo with glow */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-[#FBBF24] opacity-30 blur-lg rounded-full" />
+              <div className="relative text-[#FBBF24]">
+                <DiamondLogo />
+              </div>
+            </div>
+
             <div>
               <h1 className="text-xl sm:text-2xl font-medium text-white">
                 Zash Gems
@@ -72,10 +82,7 @@ export default function Footer() {
               "Custom Orders",
             ].map((item) => (
               <li key={item}>
-                <Link
-                  href="#"
-                  className="transition hover:text-[#FBBF24] hover:tracking-wide"
-                >
+                <Link href="#" className="transition hover:text-[#FBBF24]">
                   {item}
                 </Link>
               </li>
@@ -85,10 +92,10 @@ export default function Footer() {
       </div>
 
       {/* Bottom divider */}
-      <div className="h-px bg-linear-to-r from-transparent via-[#F59E0B33] to-transparent" />
+      <div className="h-px bg-linear-to-r from-transparent via-[#F59E0B1A] to-transparent" />
 
       {/* Copyright */}
-      <div className="text-center px-6 pt-6 pb-12 sm:pb-16 opacity-0 animate-footerFade delay-600">
+      <div className="relative z-10 text-center px-6 pt-6 pb-12 sm:pb-16 opacity-0 animate-footerFade delay-600">
         <p className="text-[#64748B] text-sm sm:text-md">
           © {new Date().getFullYear()} Zash Gems. All rights reserved. Ethically
           sourced from Sri Lanka.
