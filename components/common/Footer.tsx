@@ -37,19 +37,25 @@ export default function Footer() {
           <h4 className="text-lg text-white mb-5">Contact Us</h4>
 
           <ul className="space-y-4 text-sm sm:text-md text-[#94A3B8] flex flex-col items-center md:items-start">
-            <li className="flex items-center gap-3 hover:text-[#FBBF24] transition">
+            <li className="flex items-center gap-3 transition hover:text-[#FBBF24]">
               <Mail className="w-4 h-4" />
-              <span>info@zashgems.com</span>
+              <a href="mailto:info@zashgems.com">info@zashgems.com</a>
             </li>
 
-            <li className="flex items-center gap-3 hover:text-[#FBBF24] transition">
+            <li className="flex items-center gap-3 transition hover:text-[#FBBF24]">
               <Phone className="w-4 h-4" />
-              <span>+94 (0) 11 234 5678</span>
+              <a href="tel:+94112345678">+94 (0) 11 234 5678</a>
             </li>
 
-            <li className="flex items-center gap-3 hover:text-[#FBBF24] transition">
+            <li className="flex items-center gap-3 transition hover:text-[#FBBF24]">
               <MapPin className="w-4 h-4" />
-              <span>Ratnapura, Sri Lanka</span>
+              <a
+                href="https://www.google.com/maps/place/Ratnapura,+Sri+Lanka"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ratnapura, Sri Lanka
+              </a>
             </li>
           </ul>
         </div>
