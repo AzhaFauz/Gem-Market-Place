@@ -78,7 +78,7 @@ export default function GemGrid() {
           observer.disconnect(); // animate once
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -91,7 +91,7 @@ export default function GemGrid() {
       ref={sectionRef}
       className="
     scroll-mt-28 relative bg-[#020617]
-    py-20 sm:py-24 md:py-28
+    py-16 sm:py-20 md:py-24
     px-4 sm:px-8 md:px-20
     overflow-hidden
   "

@@ -11,9 +11,9 @@ export default function Header() {
 
   const menuItems = [
     { name: "Collection", href: "#collection" },
-    { name: "Our Story", href: "#" },
-    { name: "Contact", href: "#" },
-    { name: "Blog", href: "#" },
+    { name: "Our Story", href: "#story" },
+    { name: "Contact", href: "#contact" },
+    { name: "Blog", href: "#blog" },
   ];
 
   return (
